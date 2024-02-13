@@ -15,13 +15,15 @@ And view it at: [http://localhost:<port>/media/IMAGE_FILE_NAME](http://localhost
 
 
 ## Build Instructions
-To replicate this project, you can follow along with [the tutorial](https://testdriven.io/blog/dockerizing-flask-with-postgres-gunicorn-and-nginx/) or take a look at the [testdrivenio repo](https://github.com/testdrivenio/flask-on-docker) for the complete files, including production credentials. Rename the files appropriately, and be sure to choose ports that are available on your network. 
+To replicate this project, you can follow along with [the tutorial](https://testdriven.io/blog/dockerizing-flask-with-postgres-gunicorn-and-nginx/) or take a look at the [testdrivenio repo](https://github.com/testdrivenio/flask-on-docker) for the complete files, including production credentials, as well as the full instructions. To summarize: rename the files appropriately (by removing "sample", for example), update any environmental variables, and be sure to choose ports that are available on your network. 
 
 To build the image and run the container:
 ```
 $ docker-compose -f docker-compose.prod.yml up -d --build
 $ docker-compose -f docker-compose.prod.yml exec web python manage.py create_db
 ```
+The second command uses gunicorn + nginx.
+
 To test:
 
 Upload an image at [http://localhost:<port>/media/IMAGE_FILE_NAME](http://localhost:<port>/media/IMAGE_FILE_NAME)
