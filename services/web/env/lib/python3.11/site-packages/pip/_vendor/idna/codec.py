@@ -5,6 +5,7 @@ from typing import Tuple, Optional
 
 _unicode_dots_re = re.compile('[\u002e\u3002\uff0e\uff61]')
 
+
 class Codec(codecs.Codec):
 
     def encode(self, data: str, errors: str = 'strict') -> Tuple[bytes, int]:
@@ -25,8 +26,11 @@ class Codec(codecs.Codec):
 
         return decode(data), len(data)
 
+
 class IncrementalEncoder(codecs.BufferedIncrementalEncoder):
-    def _buffer_encode(self, data: str, errors: str, final: bool) -> Tuple[str, int]:  # type: ignore
+    # type: ignore
+    def _buffer_encode(self, data: str, errors: str,
+                       final: bool) -> Tuple[str, int]:
         if errors != 'strict':
             raise IDNAError('Unsupported error handling \"{}\"'.format(errors))
 
@@ -58,8 +62,11 @@ class IncrementalEncoder(codecs.BufferedIncrementalEncoder):
         size += len(trailing_dot)
         return result_str, size
 
+
 class IncrementalDecoder(codecs.BufferedIncrementalDecoder):
-    def _buffer_decode(self, data: str, errors: str, final: bool) -> Tuple[str, int]:  # type: ignore
+    # type: ignore
+    def _buffer_decode(self, data: str, errors: str,
+                       final: bool) -> Tuple[str, int]:
         if errors != 'strict':
             raise IDNAError('Unsupported error handling \"{}\"'.format(errors))
 

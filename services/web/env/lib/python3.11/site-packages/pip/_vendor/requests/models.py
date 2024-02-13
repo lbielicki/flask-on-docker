@@ -157,7 +157,8 @@ class RequestEncodingMixin:
                 val = [val]
             for v in val:
                 if v is not None:
-                    # Don't call str() on bytestrings: in Py3 it all goes wrong.
+                    # Don't call str() on bytestrings: in Py3 it all goes
+                    # wrong.
                     if not isinstance(v, bytes):
                         v = str(v)
 
@@ -208,12 +209,15 @@ class RequestHooksMixin:
         """Properly register a hook."""
 
         if event not in self.hooks:
-            raise ValueError(f'Unsupported event specified, with event name "{event}"')
+            raise ValueError(
+                f'Unsupported event specified, with event name "{event}"')
 
         if isinstance(hook, Callable):
             self.hooks[event].append(hook)
         elif hasattr(hook, "__iter__"):
-            self.hooks[event].extend(h for h in hook if isinstance(h, Callable))
+            self.hooks[event].extend(
+                h for h in hook if isinstance(
+                    h, Callable))
 
     def deregister_hook(self, event, hook):
         """Deregister a previously registered hook.
@@ -447,7 +451,8 @@ class PreparedRequest(RequestEncodingMixin, RequestHooksMixin):
         # In general, we want to try IDNA encoding the hostname if the string contains
         # non-ASCII characters. This allows users to automatically get the correct IDNA
         # behaviour. For strings containing only ASCII characters, we need to also verify
-        # it doesn't start with a wildcard (*), before allowing the unencoded hostname.
+        # it doesn't start with a wildcard (*), before allowing the unencoded
+        # hostname.
         if not unicode_is_ascii(host):
             try:
                 host = self._get_idna_encoded_host(host)
@@ -478,7 +483,8 @@ class PreparedRequest(RequestEncodingMixin, RequestHooksMixin):
             else:
                 query = enc_params
 
-        url = requote_uri(urlunparse([scheme, netloc, path, None, query, fragment]))
+        url = requote_uri(urlunparse(
+            [scheme, netloc, path, None, query, fragment]))
         self.url = url
 
     def prepare_headers(self, headers):
@@ -891,12 +897,14 @@ class Response:
         if self._content is False:
             # Read the contents.
             if self._content_consumed:
-                raise RuntimeError("The content for this response was already consumed")
+                raise RuntimeError(
+                    "The content for this response was already consumed")
 
             if self.status_code == 0 or self.raw is None:
                 self._content = None
             else:
-                self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                self._content = b"".join(
+                    self.iter_content(CONTENT_CHUNK_SIZE)) or b""
 
         self._content_consumed = True
         # don't need to release the connection; that's been handled by urllib3
@@ -957,7 +965,8 @@ class Response:
             encoding = guess_json_utf(self.content)
             if encoding is not None:
                 try:
-                    return complexjson.loads(self.content.decode(encoding), **kwargs)
+                    return complexjson.loads(
+                        self.content.decode(encoding), **kwargs)
                 except UnicodeDecodeError:
                     # Wrong UTF codec detected; usually because it's not UTF-8
                     # but some other 8-bit codec.  This is an RFC violation,
