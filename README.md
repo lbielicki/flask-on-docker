@@ -26,6 +26,6 @@ The second command uses gunicorn + nginx.
 
 To test:
 
-Upload an image at [http://localhost:PORT#/media/IMAGE_FILE_NAME](http://localhost:<port>/media/IMAGE_FILE_NAME)
-and view the image at [http://localhost:PORT#/media/IMAGE_FILE_NAME](http://localhost:<port>/media/IMAGE_FILE_NAME)
+Upload an image at [http://localhost:YOURPORT#/media/IMAGE_FILE_NAME](http://localhost:<port>/media/IMAGE_FILE_NAME)
+and view the image at [http://localhost:YOURPORT#/media/IMAGE_FILE_NAME](http://localhost:<port>/media/IMAGE_FILE_NAME)
 
