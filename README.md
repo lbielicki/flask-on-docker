@@ -5,9 +5,9 @@
 In this project, I made a web app that allows the user to upload an image (both static and media) from their computer and view it in their browser. 
 I followed [this tutorial](https://testdriven.io/blog/dockerizing-flask-with-postgres-gunicorn-and-nginx/) in order to dockerize Flask and create a fully working web service to emulate Instagram's tech stack.  
 
-Once the container has been successfully built and run, the user can upload an image by visiting [http://localhost:<port>/upload](http://localhost:<port>/upload)
+Once the container has been successfully built and run, the user can upload an image by visiting [http://localhost:PORT#/upload](http://localhost:<port>/upload)
 
-And view it at: [http://localhost:<port>/media/IMAGE_FILE_NAME](http://localhost:<port>/media/IMAGE_FILE_NAME)
+And view it at: [http://localhost:/PORT#/media/IMAGE_FILE_NAME](http://localhost:<port>/media/IMAGE_FILE_NAME)
 
 
 ## Demo
@@ -26,6 +26,6 @@ The second command uses gunicorn + nginx.
 
 To test:
 
-Upload an image at [http://localhost:<port>/media/IMAGE_FILE_NAME](http://localhost:<port>/media/IMAGE_FILE_NAME)
-and view the image at [http://localhost:<port>/media/IMAGE_FILE_NAME](http://localhost:<port>/media/IMAGE_FILE_NAME)
+Upload an image at [http://localhost:PORT#/media/IMAGE_FILE_NAME](http://localhost:<port>/media/IMAGE_FILE_NAME)
+and view the image at [http://localhost:PORT#/media/IMAGE_FILE_NAME](http://localhost:<port>/media/IMAGE_FILE_NAME)
 
